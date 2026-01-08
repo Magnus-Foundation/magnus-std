@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
-interface IStablecoinExchange {
+interface IStablecoinDEX {
     // Structs for return types
 
     /// @notice Represents a price level in the orderbook with a doubly-linked list of orders
@@ -59,21 +59,19 @@ interface IStablecoinExchange {
     error InvalidBaseToken();
     error OrderNotStale();
 
-    event FlipOrderPlaced(
+    event OrderCancelled(uint128 indexed orderId);
+    event OrderFilled(
+        uint128 indexed orderId, address indexed maker, address indexed taker, uint128 amountFilled, bool partialFill
+    );
+    event OrderPlaced(
         uint128 indexed orderId,
         address indexed maker,
         address indexed token,
         uint128 amount,
         bool isBid,
         int16 tick,
+        bool isFlipOrder,
         int16 flipTick
-    );
-    event OrderCancelled(uint128 indexed orderId);
-    event OrderFilled(
-        uint128 indexed orderId, address indexed maker, address indexed taker, uint128 amountFilled, bool partialFill
-    );
-    event OrderPlaced(
-        uint128 indexed orderId, address indexed maker, address indexed token, uint128 amount, bool isBid, int16 tick
     );
     event PairCreated(bytes32 indexed key, address indexed base, address indexed quote);
 
