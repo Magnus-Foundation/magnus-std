@@ -2,10 +2,10 @@
 <br>
 
 <p align="center">
-  <a href="https://tempo.xyz">
+  <a href="https://magnus.xyz">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/tempoxyz/.github/refs/heads/main/assets/combomark-dark.svg">
-      <img alt="tempo combomark" src="https://raw.githubusercontent.com/tempoxyz/.github/refs/heads/main/assets/combomark-bright.svg" width="auto" height="120">
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/magnusxyz/.github/refs/heads/main/assets/combomark-dark.svg">
+      <img alt="magnus combomark" src="https://raw.githubusercontent.com/magnusxyz/.github/refs/heads/main/assets/combomark-bright.svg" width="auto" height="120">
     </picture>
   </a>
 </p>
@@ -13,14 +13,14 @@
 <br>
 <br>
 
-# Tempo Standard Library
+# Magnus Standard Library
 
-Tempo Standard Library is a collection of helpful Tempo specific contracts and libraries for use with [Foundry](https://github.com/foundry-rs/foundry).
+Magnus Standard Library is a collection of helpful Magnus specific contracts and libraries for use with [Foundry](https://github.com/foundry-rs/foundry).
 
 ## Installation
 
 ```bash
-forge install tempoxyz/tempo-std
+forge install magnusxyz/magnus-std
 ```
 
 ## Standard Precompiles
@@ -28,22 +28,22 @@ forge install tempoxyz/tempo-std
 <pre>
 src
 ├── interfaces
-│   ├── <a href="./src/interfaces/IAccountKeychain.sol">IAccountKeychain.sol</a>: Account Keychain (T3: call scopes, periodic limits) | <a href="https://docs.tempo.xyz/protocol/transactions/spec-tempo-transaction#keychain-precompile">Docs</a> | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/account_keychain/mod.rs">Implementation</a>
-│   ├── <a href="./src/interfaces/IAddressRegistry.sol">IAddressRegistry.sol</a>: TIP-1022 Virtual Address Registry (T3+) | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/address_registry/mod.rs">Implementation</a>
-│   ├── <a href="./src/interfaces/IFeeAMM.sol">IFeeAMM.sol</a>: Fee AMM | <a href="https://docs.tempo.xyz/protocol/fees/fee-amm">Docs</a> | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/tip_fee_manager/amm.rs">Implementation</a>
-│   ├── <a href="./src/interfaces/IFeeManager.sol">IFeeManager.sol</a>: Fee AMM Management | <a href="https://docs.tempo.xyz/protocol/fees/spec-fee-amm#2-feemanager-contract">Docs</a> | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/tip_fee_manager/mod.rs">Implementation</a>
-│   ├── <a href="./src/interfaces/INonce.sol">INonce.sol</a>: 2D Nonce Management for Tempo Transactions | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/nonce/mod.rs">Implementation</a>
-│   ├── <a href="./src/interfaces/ISignatureVerifier.sol">ISignatureVerifier.sol</a>: TIP-1020 Signature Verification Precompile (T3+) | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/signature_verifier/mod.rs">Implementation</a>
-│   ├── <a href="./src/interfaces/IStablecoinDEX.sol">IStablecoinDEX.sol</a>: Stablecoin DEX | <a href="https://docs.tempo.xyz/protocol/exchange/spec#stablecoin-dex">Docs</a> | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/stablecoin_dex/mod.rs">Implementation</a>
-│   ├── <a href="./src/interfaces/ITempoStreamChannel.sol">ITempoStreamChannel.sol</a>: Streaming payment channel escrow (concept) | <a href="https://github.com/tempoxyz/tempo/blob/main/tips/ref-impls/src/TempoStreamChannel.sol">Implementation</a>
-│   ├── <a href="./src/interfaces/ITIP20Factory.sol">ITIP20Factory.sol</a>: TIP-20: Factory Contract | <a href="https://docs.tempo.xyz/protocol/tip20/spec#tip20factory">Docs</a> | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/tip20_factory/mod.rs">Implementation</a>
-│   ├── <a href="./src/interfaces/ITIP20RewardsRegistry.sol">ITIP20RewardsRegistry.sol</a>: TIP-20: Reward Distribution | <a href="https://docs.tempo.xyz/protocol/tip20-rewards/spec">Docs</a> | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/tip20/rewards.rs">Implementation</a>
-│   ├── <a href="./src/interfaces/ITIP20RolesAuth.sol">ITIP20RolesAuth.sol</a>: TIP-20: Roles & Permissions | <a href="https://docs.tempo.xyz/protocol/tip20/spec#role-based-access-control">Docs</a> | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/tip20/roles.rs">Implementation</a>
-│   ├── <a href="./src/interfaces/ITIP20.sol">ITIP20.sol</a>: TIP-20: Core Token Standard | <a href="https://docs.tempo.xyz/protocol/tip20/overview">Docs</a> | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/tip20/mod.rs">Implementation</a>
-│   ├── <a href="./src/interfaces/ITIP403Registry.sol">ITIP403Registry.sol</a>: TIP-403: Policy Registry System | <a href="https://docs.tempo.xyz/protocol/tip403/overview">Docs</a> | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/tip403_registry/mod.rs">Implementation</a>
-│   ├── <a href="./src/interfaces/IValidatorConfig.sol">IValidatorConfig.sol</a>: Manage consensus validators | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/validator_config/mod.rs">Implementation</a>
-│   └── <a href="./src/interfaces/IValidatorConfigV2.sol">IValidatorConfigV2.sol</a>: Validator Config V2 (append-only) | <a href="https://github.com/tempoxyz/tempo/blob/main/crates/precompiles/src/validator_config_v2/mod.rs">Implementation</a>
-└── <a href="./src/StdPrecompiles.sol">StdPrecompiles.sol</a>: Collection of precompiles and their interfaces on Tempo
+│   ├── <a href="./src/interfaces/IAccountKeychain.sol">IAccountKeychain.sol</a>: Account Keychain (T3: call scopes, periodic limits) | <a href="https://docs.magnus.xyz/protocol/transactions/spec-magnus-transaction#keychain-precompile">Docs</a> | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/account_keychain/mod.rs">Implementation</a>
+│   ├── <a href="./src/interfaces/IAddressRegistry.sol">IAddressRegistry.sol</a>: MIP-1022 Virtual Address Registry (T3+) | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/address_registry/mod.rs">Implementation</a>
+│   ├── <a href="./src/interfaces/IFeeAMM.sol">IFeeAMM.sol</a>: Fee AMM | <a href="https://docs.magnus.xyz/protocol/fees/fee-amm">Docs</a> | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/tip_fee_manager/amm.rs">Implementation</a>
+│   ├── <a href="./src/interfaces/IFeeManager.sol">IFeeManager.sol</a>: Fee AMM Management | <a href="https://docs.magnus.xyz/protocol/fees/spec-fee-amm#2-feemanager-contract">Docs</a> | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/tip_fee_manager/mod.rs">Implementation</a>
+│   ├── <a href="./src/interfaces/INonce.sol">INonce.sol</a>: 2D Nonce Management for Magnus Transactions | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/nonce/mod.rs">Implementation</a>
+│   ├── <a href="./src/interfaces/ISignatureVerifier.sol">ISignatureVerifier.sol</a>: MIP-1020 Signature Verification Precompile (T3+) | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/signature_verifier/mod.rs">Implementation</a>
+│   ├── <a href="./src/interfaces/IStablecoinDEX.sol">IStablecoinDEX.sol</a>: Stablecoin DEX | <a href="https://docs.magnus.xyz/protocol/exchange/spec#stablecoin-dex">Docs</a> | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/stablecoin_dex/mod.rs">Implementation</a>
+│   ├── <a href="./src/interfaces/IMagnusStreamChannel.sol">IMagnusStreamChannel.sol</a>: Streaming payment channel escrow (concept) | <a href="https://github.com/magnusxyz/magnus/blob/main/tips/ref-impls/src/MagnusStreamChannel.sol">Implementation</a>
+│   ├── <a href="./src/interfaces/IMIP20Factory.sol">IMIP20Factory.sol</a>: MIP-20: Factory Contract | <a href="https://docs.magnus.xyz/protocol/tip20/spec#tip20factory">Docs</a> | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/tip20_factory/mod.rs">Implementation</a>
+│   ├── <a href="./src/interfaces/IMIP20RewardsRegistry.sol">IMIP20RewardsRegistry.sol</a>: MIP-20: Reward Distribution | <a href="https://docs.magnus.xyz/protocol/tip20-rewards/spec">Docs</a> | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/tip20/rewards.rs">Implementation</a>
+│   ├── <a href="./src/interfaces/IMIP20RolesAuth.sol">IMIP20RolesAuth.sol</a>: MIP-20: Roles & Permissions | <a href="https://docs.magnus.xyz/protocol/tip20/spec#role-based-access-control">Docs</a> | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/tip20/roles.rs">Implementation</a>
+│   ├── <a href="./src/interfaces/IMIP20.sol">IMIP20.sol</a>: MIP-20: Core Token Standard | <a href="https://docs.magnus.xyz/protocol/tip20/overview">Docs</a> | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/tip20/mod.rs">Implementation</a>
+│   ├── <a href="./src/interfaces/IMIP403Registry.sol">IMIP403Registry.sol</a>: MIP-403: Policy Registry System | <a href="https://docs.magnus.xyz/protocol/tip403/overview">Docs</a> | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/tip403_registry/mod.rs">Implementation</a>
+│   ├── <a href="./src/interfaces/IValidatorConfig.sol">IValidatorConfig.sol</a>: Manage consensus validators | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/validator_config/mod.rs">Implementation</a>
+│   └── <a href="./src/interfaces/IValidatorConfigV2.sol">IValidatorConfigV2.sol</a>: Validator Config V2 (append-only) | <a href="https://github.com/magnusxyz/magnus/blob/main/crates/precompiles/src/validator_config_v2/mod.rs">Implementation</a>
+└── <a href="./src/StdPrecompiles.sol">StdPrecompiles.sol</a>: Collection of precompiles and their interfaces on Magnus
 </pre>
 
 ## Standard Contracts
@@ -54,14 +54,14 @@ src
 │   ├── <a href="./src/interfaces/ICreateX.sol">ICreateX.sol</a>: <a href="https://github.com/pcaversaccio/createx">@pcaversaccio/createx</a>
 │   ├── <a href="./src/interfaces/IMulticall3.sol">IMulticall3.sol</a>: <a href="https://github.com/mds1/multicall3">@mds1/multicall3</a>
 │   └── <a href="./src/interfaces/IPermit2.sol">IPermit2.sol</a>: <a href="https://github.com/Uniswap/permit2">@uniswap/permit2</a>
-└── <a href="./src/StdContracts.sol">StdContracts.sol</a>: Collection of predeployed contracts and their interfaces on Tempo
+└── <a href="./src/StdContracts.sol">StdContracts.sol</a>: Collection of predeployed contracts and their interfaces on Magnus
 </pre>
 
 ## Standard Tokens
 
 <pre>
 src
-└── <a href="./src/StdTokens.sol">StdTokens.sol</a>: Collection of tokens and their interfaces on Tempo
+└── <a href="./src/StdTokens.sol">StdTokens.sol</a>: Collection of tokens and their interfaces on Magnus
 </pre>
 
 ## Standard Vm
@@ -73,7 +73,7 @@ src
 
 ## Transaction Builders
 
-Solidity libraries for building and RLP-encoding Ethereum and Tempo transactions, useful for testing with Foundry.
+Solidity libraries for building and RLP-encoding Ethereum and Magnus transactions, useful for testing with Foundry.
 
 <pre>
 src
@@ -82,7 +82,7 @@ src
     ├── <a href="./src/tx/Eip1559TransactionLib.sol">Eip1559TransactionLib.sol</a>: EIP-1559 (type 2) transaction builder
     ├── <a href="./src/tx/Eip7702TransactionLib.sol">Eip7702TransactionLib.sol</a>: EIP-7702 (type 4) transaction builder with authorization support
     ├── <a href="./src/tx/LegacyTransactionLib.sol">LegacyTransactionLib.sol</a>: Legacy (type 0) transaction builder
-    ├── <a href="./src/tx/TempoTransactionLib.sol">TempoTransactionLib.sol</a>: Tempo (type 0x76) transaction builder with batch calls, 2D nonces, and fee payer support
+    ├── <a href="./src/tx/MagnusTransactionLib.sol">MagnusTransactionLib.sol</a>: Magnus (type 0x76) transaction builder with batch calls, 2D nonces, and fee payer support
     └── <a href="./src/tx/TxRlp.sol">TxRlp.sol</a>: RLP encoding helpers for transaction builders
 </pre>
 
@@ -92,11 +92,11 @@ The current minimum supported Solidity version is `0.8.20`.
 
 ## Contributing
 
-Our contributor guidelines can be found in [`CONTRIBUTING.md`](https://github.com/tempoxyz/tempo-std?tab=contributing-ov-file).
+Our contributor guidelines can be found in [`CONTRIBUTING.md`](https://github.com/magnusxyz/magnus-std?tab=contributing-ov-file).
 
 ## Security
 
-See [`SECURITY.md`](https://github.com/tempoxyz/tempo-std?tab=security-ov-file).
+See [`SECURITY.md`](https://github.com/magnusxyz/magnus-std?tab=security-ov-file).
 
 ## License
 

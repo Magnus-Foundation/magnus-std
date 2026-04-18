@@ -4,7 +4,7 @@ pragma solidity >=0.8.13 <0.9.0;
 import {VmRlp} from "../StdVm.sol";
 
 /// @title RLP encoding helpers for transaction builders.
-/// @dev Local copy for test use - does not depend on tempo-std VmRlp
+/// @dev Local copy for test use - does not depend on magnus-std VmRlp
 library TxRlp {
     /// @notice Encodes a uint256 as minimal big-endian bytes (no leading zeros).
     /// @dev Zero is encoded as empty bytes per RLP spec.

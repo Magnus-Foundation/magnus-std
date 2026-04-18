@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 pragma solidity >=0.8.13 <0.9.0;
 
-/// @title Interface for TIP20RewardsRegistry
-/// @notice Registry contract for all TIP20 reward streams
-interface ITIP20RewardsRegistry {
+/// @title Interface for MIP20RewardsRegistry
+/// @notice Registry contract for all MIP20 reward streams
+interface IMIP20RewardsRegistry {
     error StreamsAlreadyFinalized();
     error Unauthorized();
 

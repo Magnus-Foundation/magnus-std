@@ -5,9 +5,9 @@ import {IMulticall3} from "./interfaces/IMulticall3.sol";
 import {ICreateX} from "./interfaces/ICreateX.sol";
 import {IPermit2} from "./interfaces/IPermit2.sol";
 
-/// @title Standard Contracts Library for Tempo
+/// @title Standard Contracts Library for Magnus
 ///
-/// @notice <https://github.com/tempoxyz/tempo/tree/main/crates/contracts/src/lib.rs>
+/// @notice <https://github.com/magnusxyz/magnus/tree/main/crates/contracts/src/lib.rs>
 library StdContracts {
     address internal constant MULTICALL3_ADDRESS = 0xcA11bde05977b3631167028862bE2a173976CA11;
     address internal constant CREATEX_ADDRESS = 0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed;

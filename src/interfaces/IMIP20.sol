@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 pragma solidity >=0.8.13 <0.9.0;
 
-/// @title The interface for TIP-20 compliant tokens
+/// @title The interface for MIP-20 compliant tokens
 /// @notice A token standard that extends ERC-20 with additional features including transfer policies, memo support, and pause functionality
-interface ITIP20 {
+interface IMIP20 {
     /// @notice Error when attempting an operation while the contract is paused.
     error ContractPaused();
 
@@ -53,13 +53,13 @@ interface ITIP20 {
     /// @param to The address that received the newly minted tokens.
     /// @param amount The amount of tokens minted.
     event Mint(address indexed to, uint256 amount);
-    event NextQuoteTokenSet(address indexed updater, ITIP20 indexed nextQuoteToken);
+    event NextQuoteTokenSet(address indexed updater, IMIP20 indexed nextQuoteToken);
 
     /// @notice Emitted when the contract's pause state changes.
     /// @param updater The address that initiated the pause state change.
     /// @param isPaused The new pause state of the contract.
     event PauseStateUpdate(address indexed updater, bool isPaused);
-    event QuoteTokenUpdate(address indexed updater, ITIP20 indexed newQuoteToken);
+    event QuoteTokenUpdate(address indexed updater, IMIP20 indexed newQuoteToken);
     event RewardRecipientSet(address indexed holder, address indexed recipient);
     event RewardDistributed(address indexed funder, uint256 amount);
 
@@ -156,7 +156,7 @@ interface ITIP20 {
 
     function name() external view returns (string memory);
 
-    function nextQuoteToken() external view returns (ITIP20);
+    function nextQuoteToken() external view returns (IMIP20);
 
     function optedInSupply() external view returns (uint128);
 
@@ -167,9 +167,9 @@ interface ITIP20 {
     /// @return True if the contract is paused, false otherwise.
     function paused() external view returns (bool);
 
-    function quoteToken() external view returns (ITIP20);
+    function quoteToken() external view returns (IMIP20);
 
-    function setNextQuoteToken(ITIP20 newQuoteToken) external;
+    function setNextQuoteToken(IMIP20 newQuoteToken) external;
 
     function setRewardRecipient(address newRewardRecipient) external;
 
@@ -238,7 +238,7 @@ interface ITIP20 {
     /// @return The total pending claimable reward amount.
     function getPendingRewards(address account) external view returns (uint256);
 
-    // EIP-2612 Permit (TIP-1004)
+    // EIP-2612 Permit (MIP-1004)
 
     /// @notice The permit signature has expired (block.timestamp > deadline)
     error PermitExpired();

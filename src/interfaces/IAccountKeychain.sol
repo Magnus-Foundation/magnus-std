@@ -9,7 +9,7 @@ pragma solidity >=0.8.13 <0.9.0;
  * The Account Keychain allows accounts to authorize secondary keys (Access Keys) that can sign
  * transactions on behalf of the account. Access Keys can be scoped by:
  * - Expiry timestamp (when the key becomes invalid)
- * - Per-TIP20 token spending limits (one-time or periodic) that deplete as the key spends
+ * - Per-MIP20 token spending limits (one-time or periodic) that deplete as the key spends
  * - Call scopes restricting which contracts/selectors the key may call (T3+)
  *
  * Only the Root Key can call authorizeKey, revokeKey, updateSpendingLimit, setAllowedCalls,
@@ -34,13 +34,13 @@ interface IAccountKeychain {
 
     /// @notice Legacy token spending limit structure used before T3
     struct LegacyTokenLimit {
-        address token; // TIP20 token address
+        address token; // MIP20 token address
         uint256 amount; // Spending limit amount
     }
 
     /// @notice Token spending limit structure
     struct TokenLimit {
-        address token; // TIP20 token address
+        address token; // MIP20 token address
         uint256 amount; // Spending limit amount
         uint64 period; // Period duration in seconds (0 = one-time limit, >0 = periodic reset)
     }

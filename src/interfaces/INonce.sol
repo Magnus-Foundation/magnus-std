@@ -2,7 +2,7 @@
 pragma solidity >=0.8.13 <0.9.0;
 
 /// @title INonce - Nonce Precompile Interface
-/// @notice Interface for managing 2D nonces as per the Tempo Transaction spec
+/// @notice Interface for managing 2D nonces as per the Magnus Transaction spec
 /// @dev This precompile manages user nonce keys (1-N) while protocol nonces (key 0)
 ///      are handled directly by account state. Each account can have multiple
 ///      independent nonce sequences identified by a nonce key.

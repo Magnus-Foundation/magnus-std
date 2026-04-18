@@ -5,15 +5,15 @@ import {VmRlp} from "../StdVm.sol";
 import {TxRlp} from "./TxRlp.sol";
 import {AccessListItem} from "./AccessListTypes.sol";
 
-/// @notice A single call in a Tempo transaction batch.
-struct TempoCall {
+/// @notice A single call in a Magnus transaction batch.
+struct MagnusCall {
     address to;
     uint256 value;
     bytes data;
 }
 
-/// @notice A signed authorization for Tempo transactions.
-struct TempoAuthorization {
+/// @notice A signed authorization for Magnus transactions.
+struct MagnusAuthorization {
     uint256 chainId;
     address authority;
     uint64 nonce;
@@ -22,13 +22,13 @@ struct TempoAuthorization {
     bytes32 s;
 }
 
-/// @notice A Tempo transaction (type 0x76).
-struct TempoTransaction {
+/// @notice A Magnus transaction (type 0x76).
+struct MagnusTransaction {
     uint64 chainId;
     uint256 maxPriorityFeePerGas;
     uint256 maxFeePerGas;
     uint64 gasLimit;
-    TempoCall[] calls;
+    MagnusCall[] calls;
     AccessListItem[] accessList;
     uint256 nonceKey;
     uint64 nonce;
@@ -40,112 +40,112 @@ struct TempoTransaction {
     address feeToken;
     bool hasFeePayerSignature;
     bytes feePayerSignature;
-    TempoAuthorization[] authorizationList;
+    MagnusAuthorization[] authorizationList;
     bool hasKeyAuthorization;
     bytes keyAuthorization;
 }
 
-/// @title Builder and RLP encoder for Tempo transactions (type 0x76).
-/// @dev Encoding follows the Tempo spec where signed transactions have 15 fields:
+/// @title Builder and RLP encoder for Magnus transactions (type 0x76).
+/// @dev Encoding follows the Magnus spec where signed transactions have 15 fields:
 ///      14 transaction fields + 1 signature field (65-byte secp256k1: r || s || v)
-library TempoTransactionLib {
-    /// @notice Tempo transaction type prefix.
+library MagnusTransactionLib {
+    /// @notice Magnus transaction type prefix.
     uint8 internal constant TX_TYPE = 0x76;
 
-    /// @notice Creates a new Tempo transaction with default values.
-    function create() internal pure returns (TempoTransaction memory tx_) {
+    /// @notice Creates a new Magnus transaction with default values.
+    function create() internal pure returns (MagnusTransaction memory tx_) {
         tx_.gasLimit = 21000;
     }
 
     /// @notice Sets the chain ID.
-    function withChainId(TempoTransaction memory self, uint64 chainId) internal pure returns (TempoTransaction memory) {
+    function withChainId(MagnusTransaction memory self, uint64 chainId) internal pure returns (MagnusTransaction memory) {
         self.chainId = chainId;
         return self;
     }
 
     /// @notice Sets the max priority fee per gas.
-    function withMaxPriorityFeePerGas(TempoTransaction memory self, uint256 fee)
+    function withMaxPriorityFeePerGas(MagnusTransaction memory self, uint256 fee)
         internal
         pure
-        returns (TempoTransaction memory)
+        returns (MagnusTransaction memory)
     {
         self.maxPriorityFeePerGas = fee;
         return self;
     }
 
     /// @notice Sets the max fee per gas.
-    function withMaxFeePerGas(TempoTransaction memory self, uint256 fee)
+    function withMaxFeePerGas(MagnusTransaction memory self, uint256 fee)
         internal
         pure
-        returns (TempoTransaction memory)
+        returns (MagnusTransaction memory)
     {
         self.maxFeePerGas = fee;
         return self;
     }
 
     /// @notice Sets the gas limit.
-    function withGasLimit(TempoTransaction memory self, uint64 gasLimit)
+    function withGasLimit(MagnusTransaction memory self, uint64 gasLimit)
         internal
         pure
-        returns (TempoTransaction memory)
+        returns (MagnusTransaction memory)
     {
         self.gasLimit = gasLimit;
         return self;
     }
 
     /// @notice Sets the calls array.
-    function withCalls(TempoTransaction memory self, TempoCall[] memory calls)
+    function withCalls(MagnusTransaction memory self, MagnusCall[] memory calls)
         internal
         pure
-        returns (TempoTransaction memory)
+        returns (MagnusTransaction memory)
     {
         self.calls = calls;
         return self;
     }
 
     /// @notice Convenience method to set a single call.
-    function withCall(TempoTransaction memory self, address to, uint256 value, bytes memory data)
+    function withCall(MagnusTransaction memory self, address to, uint256 value, bytes memory data)
         internal
         pure
-        returns (TempoTransaction memory)
+        returns (MagnusTransaction memory)
     {
-        TempoCall[] memory calls = new TempoCall[](1);
-        calls[0] = TempoCall({to: to, value: value, data: data});
+        MagnusCall[] memory calls = new MagnusCall[](1);
+        calls[0] = MagnusCall({to: to, value: value, data: data});
         self.calls = calls;
         return self;
     }
 
     /// @notice Sets the access list.
-    function withAccessList(TempoTransaction memory self, AccessListItem[] memory accessList)
+    function withAccessList(MagnusTransaction memory self, AccessListItem[] memory accessList)
         internal
         pure
-        returns (TempoTransaction memory)
+        returns (MagnusTransaction memory)
     {
         self.accessList = accessList;
         return self;
     }
 
     /// @notice Sets the 2D nonce key.
-    function withNonceKey(TempoTransaction memory self, uint256 nonceKey)
+    function withNonceKey(MagnusTransaction memory self, uint256 nonceKey)
         internal
         pure
-        returns (TempoTransaction memory)
+        returns (MagnusTransaction memory)
     {
         self.nonceKey = nonceKey;
         return self;
     }
 
     /// @notice Sets the nonce.
-    function withNonce(TempoTransaction memory self, uint64 nonce) internal pure returns (TempoTransaction memory) {
+    function withNonce(MagnusTransaction memory self, uint64 nonce) internal pure returns (MagnusTransaction memory) {
         self.nonce = nonce;
         return self;
     }
 
     /// @notice Sets the validBefore timestamp.
-    function withValidBefore(TempoTransaction memory self, uint64 timestamp)
+    function withValidBefore(MagnusTransaction memory self, uint64 timestamp)
         internal
         pure
-        returns (TempoTransaction memory)
+        returns (MagnusTransaction memory)
     {
         self.hasValidBefore = true;
         self.validBefore = timestamp;
@@ -153,10 +153,10 @@ library TempoTransactionLib {
     }
 
     /// @notice Sets the validAfter timestamp.
-    function withValidAfter(TempoTransaction memory self, uint64 timestamp)
+    function withValidAfter(MagnusTransaction memory self, uint64 timestamp)
         internal
         pure
-        returns (TempoTransaction memory)
+        returns (MagnusTransaction memory)
     {
         self.hasValidAfter = true;
         self.validAfter = timestamp;
@@ -164,17 +164,17 @@ library TempoTransactionLib {
     }
 
     /// @notice Sets the fee token address.
-    function withFeeToken(TempoTransaction memory self, address token) internal pure returns (TempoTransaction memory) {
+    function withFeeToken(MagnusTransaction memory self, address token) internal pure returns (MagnusTransaction memory) {
         self.hasFeeToken = true;
         self.feeToken = token;
         return self;
     }
 
     /// @notice Sets the fee payer signature.
-    function withFeePayerSignature(TempoTransaction memory self, bytes memory signature)
+    function withFeePayerSignature(MagnusTransaction memory self, bytes memory signature)
         internal
         pure
-        returns (TempoTransaction memory)
+        returns (MagnusTransaction memory)
     {
         self.hasFeePayerSignature = true;
         self.feePayerSignature = signature;
@@ -182,20 +182,20 @@ library TempoTransactionLib {
     }
 
     /// @notice Sets the authorization list.
-    function withAuthorizationList(TempoTransaction memory self, TempoAuthorization[] memory authorizationList)
+    function withAuthorizationList(MagnusTransaction memory self, MagnusAuthorization[] memory authorizationList)
         internal
         pure
-        returns (TempoTransaction memory)
+        returns (MagnusTransaction memory)
     {
         self.authorizationList = authorizationList;
         return self;
     }
 
     /// @notice Sets the key authorization.
-    function withKeyAuthorization(TempoTransaction memory self, bytes memory keyAuthorization)
+    function withKeyAuthorization(MagnusTransaction memory self, bytes memory keyAuthorization)
         internal
         pure
-        returns (TempoTransaction memory)
+        returns (MagnusTransaction memory)
     {
         self.hasKeyAuthorization = true;
         self.keyAuthorization = keyAuthorization;
@@ -206,7 +206,7 @@ library TempoTransactionLib {
     /// @dev Format: 0x76 || RLP([chainId, maxPriorityFeePerGas, maxFeePerGas, gasLimit, calls, accessList,
     ///              nonceKey, nonce, validBefore, validAfter, feeToken, feePayerSignature, authorizationList, keyAuthorization])
     ///      Note: keyAuthorization is truly optional (no bytes if not present)
-    function encode(TempoTransaction memory self, VmRlp) internal pure returns (bytes memory) {
+    function encode(MagnusTransaction memory self, VmRlp) internal pure returns (bytes memory) {
         // 13 mandatory fields + 1 optional keyAuthorization
         uint256 fieldCount = self.hasKeyAuthorization ? 14 : 13;
         bytes[] memory fields = new bytes[](fieldCount);
@@ -249,7 +249,7 @@ library TempoTransactionLib {
     /// @dev Format: 0x76 || RLP([...14 fields, signature_bytes])
     ///      The signature is a 65-byte secp256k1 signature: r (32) || s (32) || v (1)
     /// @param v The recovery parameter (27 or 28 from vm.sign). Will be stored as-is in the signature bytes.
-    function encodeWithSignature(TempoTransaction memory self, VmRlp, uint8 v, bytes32 r, bytes32 s)
+    function encodeWithSignature(MagnusTransaction memory self, VmRlp, uint8 v, bytes32 r, bytes32 s)
         internal
         pure
         returns (bytes memory)
@@ -296,8 +296,8 @@ library TempoTransactionLib {
     /// @dev When a fee payer signature is present:
     ///      - fee_token is SKIPPED (user doesn't commit to fee token)
     ///      - fee payer signature field is encoded as a 0x00 placeholder byte
-    ///      This matches Rust's TempoTransaction::encode_for_signing / signature_hash.
-    function signingHash(TempoTransaction memory self, VmRlp) internal pure returns (bytes32) {
+    ///      This matches Rust's MagnusTransaction::encode_for_signing / signature_hash.
+    function signingHash(MagnusTransaction memory self, VmRlp) internal pure returns (bytes32) {
         uint256 fieldCount = self.hasKeyAuthorization ? 14 : 13;
         bytes[] memory fields = new bytes[](fieldCount);
 
@@ -339,8 +339,8 @@ library TempoTransactionLib {
     /// @notice Computes the fee payer signature hash.
     /// @dev The fee payer signs this hash to sponsor the transaction. Format:
     ///      keccak256(0x78 || RLP([...all fields with sender address in place of feePayerSignature...]))
-    ///      This matches Rust's TempoTransaction::fee_payer_signature_hash().
-    function feePayerSignatureHash(TempoTransaction memory self, VmRlp, address sender)
+    ///      This matches Rust's MagnusTransaction::fee_payer_signature_hash().
+    function feePayerSignatureHash(MagnusTransaction memory self, VmRlp, address sender)
         internal
         pure
         returns (bytes32)
@@ -377,7 +377,7 @@ library TempoTransactionLib {
     /// @dev Each call is encoded as [to, value, data].
     ///      For CREATE calls (to == address(0)), `to` is encoded as empty string (0x80)
     ///      to match Rust's TxKind::Create encoding.
-    function _encodeCalls(TempoCall[] memory calls) private pure returns (bytes memory) {
+    function _encodeCalls(MagnusCall[] memory calls) private pure returns (bytes memory) {
         bytes[] memory encodedCalls = new bytes[](calls.length);
         for (uint256 i = 0; i < calls.length; i++) {
             bytes[] memory callFields = new bytes[](3);
@@ -414,7 +414,7 @@ library TempoTransactionLib {
     }
 
     /// @notice Encodes the authorization list as an RLP list.
-    function _encodeAuthorizationList(TempoAuthorization[] memory list) private pure returns (bytes memory) {
+    function _encodeAuthorizationList(MagnusAuthorization[] memory list) private pure returns (bytes memory) {
         bytes[] memory encodedAuths = new bytes[](list.length);
         for (uint256 i = 0; i < list.length; i++) {
             bytes[] memory authFields = new bytes[](6);
@@ -457,7 +457,7 @@ library TempoTransactionLib {
     // ============ Legacy function signatures for backwards compatibility ============
 
     /// @notice Encodes the calls array as an RLP list (legacy signature).
-    function encodeCalls(VmRlp, TempoCall[] memory calls) internal pure returns (bytes memory) {
+    function encodeCalls(VmRlp, MagnusCall[] memory calls) internal pure returns (bytes memory) {
         return _encodeCalls(calls);
     }
 
@@ -467,7 +467,7 @@ library TempoTransactionLib {
     }
 
     /// @notice Encodes the authorization list as an RLP list (legacy signature).
-    function encodeAuthorizationList(VmRlp, TempoAuthorization[] memory list) internal pure returns (bytes memory) {
+    function encodeAuthorizationList(VmRlp, MagnusAuthorization[] memory list) internal pure returns (bytes memory) {
         return _encodeAuthorizationList(list);
     }
 }

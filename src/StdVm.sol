@@ -10,7 +10,7 @@ interface VmRlp {
 /// @title Minimal Vm interface for transaction execution.
 interface VmExecuteTransaction {
     /// @notice Executes an RLP-encoded transaction with full EVM semantics.
-    /// @dev Decodes using TempoTxEnvelope::decode() which auto-detects tx type.
+    /// @dev Decodes using MagnusTxEnvelope::decode() which auto-detects tx type.
     /// @param rawTx The RLP-encoded transaction bytes.
     /// @return The execution output bytes.
     function executeTransaction(bytes calldata rawTx) external returns (bytes memory);

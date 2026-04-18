@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 pragma solidity >=0.8.13 <0.9.0;
 
-import {ITIP20} from "./ITIP20.sol";
+import {IMIP20} from "./IMIP20.sol";
 
-/// @title The interface for TIP-20 token factory
-/// @notice Factory contract for creating and deploying TIP-20 compliant tokens
-interface ITIP20Factory {
+/// @title The interface for MIP-20 token factory
+/// @notice Factory contract for creating and deploying MIP-20 compliant tokens
+interface IMIP20Factory {
     error AddressReserved();
     error InvalidQuoteToken();
     error TokenAlreadyExists(address tokenAddress);
 
-    /// @notice Emitted when a new TIP-20 token is created
+    /// @notice Emitted when a new MIP-20 token is created
     /// @param token The address of the newly created token contract
     /// @param name The name of the created token
     /// @param symbol The symbol of the created token
@@ -23,12 +23,12 @@ interface ITIP20Factory {
         string name,
         string symbol,
         string currency,
-        ITIP20 quoteToken,
+        IMIP20 quoteToken,
         address admin,
         bytes32 salt
     );
 
-    /// @notice Creates a new TIP-20 compliant token
+    /// @notice Creates a new MIP-20 compliant token
     /// @param name The name for the new token
     /// @param symbol The symbol for the new token
     /// @param currency The currency identifier for the new token
@@ -38,14 +38,14 @@ interface ITIP20Factory {
         string memory name,
         string memory symbol,
         string memory currency,
-        ITIP20 quoteToken,
+        IMIP20 quoteToken,
         address admin,
         bytes32 salt
     ) external returns (address);
 
-    /// @notice Checks if a given address is a TIP-20 compliant token
+    /// @notice Checks if a given address is a MIP-20 compliant token
     /// @param token The address of the token to check
-    /// @return True if the address is a TIP-20 token, false otherwise
+    /// @return True if the address is a MIP-20 token, false otherwise
     function isTIP20(address token) external view returns (bool);
 
     /// @notice Predicts the address of a token deployment given sender and salt
