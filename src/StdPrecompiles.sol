@@ -17,7 +17,7 @@ import {INonce} from "./interfaces/INonce.sol";
 ///
 /// @notice <https://github.com/magnusxyz/magnus/blob/main/crates/contracts/src/precompiles/mod.rs>
 library StdPrecompiles {
-    address internal constant TIP_FEE_MANAGER_ADDRESS = 0xfeEC000000000000000000000000000000000000;
+    address internal constant MIP_FEE_MANAGER_ADDRESS = 0xfeEC000000000000000000000000000000000000;
     address internal constant MIP403_REGISTRY_ADDRESS = 0x403c000000000000000000000000000000000000;
     address internal constant MIP20_FACTORY_ADDRESS = 0x20Fc000000000000000000000000000000000000;
     address internal constant MIP20_REWARDS_REGISTRY_ADDRESS = 0x2100000000000000000000000000000000000000;
@@ -29,7 +29,7 @@ library StdPrecompiles {
     address internal constant ADDRESS_REGISTRY_ADDRESS = 0xfDC0000000000000000000000000000000000000;
     address internal constant SIGNATURE_VERIFIER_ADDRESS = 0x5165300000000000000000000000000000000000;
 
-    IFeeManager internal constant TIP_FEE_MANAGER = IFeeManager(TIP_FEE_MANAGER_ADDRESS);
+    IFeeManager internal constant TIP_FEE_MANAGER = IFeeManager(MIP_FEE_MANAGER_ADDRESS);
     IMIP403Registry internal constant MIP403_REGISTRY = IMIP403Registry(MIP403_REGISTRY_ADDRESS);
     IMIP20Factory internal constant MIP20_FACTORY = IMIP20Factory(MIP20_FACTORY_ADDRESS);
     IMIP20RewardsRegistry internal constant MIP20_REWARDS_REGISTRY =

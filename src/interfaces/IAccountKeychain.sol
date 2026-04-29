@@ -10,7 +10,7 @@ pragma solidity >=0.8.13 <0.9.0;
  * transactions on behalf of the account. Access Keys can be scoped by:
  * - Expiry timestamp (when the key becomes invalid)
  * - Per-MIP20 token spending limits (one-time or periodic) that deplete as the key spends
- * - Call scopes restricting which contracts/selectors the key may call (T3+)
+ * - Call scopes restricting which contracts/selectors the key may call (M3+)
  *
  * Only the Root Key can call authorizeKey, revokeKey, updateSpendingLimit, setAllowedCalls,
  * and removeAllowedCalls.
@@ -32,7 +32,7 @@ interface IAccountKeychain {
         WebAuthn
     }
 
-    /// @notice Legacy token spending limit structure used before T3
+    /// @notice Legacy token spending limit structure used before M3
     struct LegacyTokenLimit {
         address token; // MIP20 token address
         uint256 amount; // Spending limit amount
@@ -123,7 +123,7 @@ interface IAccountKeychain {
     //////////////////////////////////////////////////////////////*/
 
     /**
-     * @notice Legacy authorize-key entrypoint used before T3
+     * @notice Legacy authorize-key entrypoint used before M3
      * @param keyId The key identifier (address) to authorize
      * @param signatureType Signature type of the key
      * @param expiry Unix timestamp when key expires
@@ -139,7 +139,7 @@ interface IAccountKeychain {
     ) external;
 
     /**
-     * @notice Authorize a new key for the caller's account with T3 extensions
+     * @notice Authorize a new key for the caller's account with M3 extensions
      * @param keyId The key identifier (address derived from public key)
      * @param signatureType Signature type of the key
      * @param config Access-key expiry and optional limits / call restrictions
